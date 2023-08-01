@@ -1,0 +1,80 @@
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="/plugins/3rd-party/materialize-css/materialize.min.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="/plugins/3rd-party/slick/slick.css"/>
+      <link type="text/css" rel="stylesheet" href="/plugins/3rd-party/slick/slick-theme.css"/>
+      
+      <link type="text/css" rel="stylesheet" href="/plugins/internal/css/preloader.css"/>
+      <link type="text/css" rel="stylesheet" href="/plugins/internal/css/margin-padding.min.css"/>
+      <link type="text/css" rel="stylesheet" href="/plugins/internal/css/main.css"/>
+      <link type="text/css" rel="stylesheet" href="/plugins/internal/css/spotify-like-card.css"/>
+
+      {{!-- cdn --}}
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    
+      {{!-- important js --}}
+      <script type="text/javascript" src="/plugins/3rd-party/jquery/jquery-3.7.0.min.js"></script>
+      <script type="text/javascript" src="/plugins/internal/js/templating.js"></script>
+      <title>{{title}}</title>
+      <!--Let browser know website is optimized for mobile-->
+      <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+      <link rel="manifest" href="/images/favicon/site.webmanifest">
+      <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#c62828">
+      <meta name="msapplication-TileColor" content="#b91d47">
+      <meta name="theme-color" content="#c62828">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <style>
+        #playerFooter {
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          color: white;
+        }
+      </style>
+
+      <script>
+        function getRequest(url, dataType, cb) {
+          $.ajax({
+            method: 'get',
+            url: url,
+            dataType: dataType,
+            crossDomain: true,
+            success: function (data) {
+              cb(data) 
+            }
+          })
+        }
+      </script>
+
+    </head>
+
+    <body style="background-color: #010101;color: white;">
+      
+      {{> navbar}}
+      <div class="changeable-content">
+        {{{body}}}
+      </div>
+      {{>audio_player}}
+            <div class="loader-wrapper">
+        <div class="loader">
+        </div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+      </div>
+      {{!-- cdn --}}
+      <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+      <!--JavaScript at end of body for optimized loading-->
+      <script type="text/javascript" src="/plugins/3rd-party/materialize-css/materialize.min.js"></script>
+      <script type="text/javascript" src="/plugins/3rd-party/slick/slick.min.js"></script>
+
+      <script type="text/javascript" src="/plugins/internal/js/default.js"></script>
+    </body>
+  </html>

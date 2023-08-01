@@ -1,0 +1,23 @@
+<div id="recommendation-playlists-wrapper"></div>
+
+<div id="top-artists-wrapper"></div>
+
+<div id="top-albums-wrapper"></div>
+
+<div id="top-playlists-wrapper"></div>
+
+<script id="view-script">
+    $(function() {
+        getRequest('https://api.deezer.com/radio/top?output=jsonp', 'jsonp', function (data) {
+            appendCardsComponent("Playlist You'll Like", data.data, 'recommendation-playlists-cards','#recommendation-playlists-wrapper');
+        })
+        getRequest('https://api.deezer.com/editorial/0/charts?output=jsonp', 'jsonp', function (charts) {
+            appendCardsComponent("Top Playlists", charts.playlists.data, 'top-playlists-cards','#top-playlists-wrapper');
+            appendCardsComponent("Top Artists", charts.artists.data, 'top-artists-cards','#top-artists-wrapper', 'name');
+        })
+        
+        getRequest('https://api.deezer.com/editorial/0/selection?output=jsonp', 'jsonp', function (albums) {
+            appendCardsComponent("Top Albums", albums.data, 'top-albums-cards','#top-albums-wrapper');
+        })
+    });
+</script>

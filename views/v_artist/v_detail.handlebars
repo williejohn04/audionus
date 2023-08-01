@@ -1,0 +1,64 @@
+<div class="row mt-5 ml-5 mr-5">
+    <div class="col s12 m12 l6 xl6 center">
+        <img src="{{artist.data.picture_big}}" class="circle responsive-img">
+    </div>
+    <div class="col s12 m12 l6 xl6 center">
+        <h4 style="font-weight: bold;">{{artist.data.name}}</h4>
+        <table>
+            <tbody>
+                {{#each topTracks.data.data}}
+                <tr style="border-bottom:1px solid #212121;">
+                    <td>
+                        <a href="/album/{{this.album.id}}"><img width="45px" height="45px" src="{{this.album.cover_small}}" class="responsive-img"> </a>
+                        <span style="display: inline-block;">
+                            <span>{{this.title}} {{#if this.explicit_lyrics}}<i class="material-icons grey-text lighten-5 tiny prefix">explicit</i> {{/if}}
+                            <br>
+                            <a class="grey-text lighten-5" href="/album/{{this.album.id}}">{{this.album.title}}</a> <span class="hide-on-med-and-down grey-text lighten-5"> – </span> 
+                            {{{getContributors this.contributors}}}
+                        </span>
+                    </td>
+                </tr>
+                {{/each}}
+                <tr>
+                    <td class="right-align">
+                        <span class="grey-text">view more &#62;&#62;</span>
+
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="artist-albums-wrapper">
+    {{> card_slide (object cardTitle="Discography" idName="artist-albums-card" cardTextFrom="title" items=artistAlbums.data.data ) }}
+</div>
+
+<div id="artist-playlists-wrapper">
+    {{> card_slide (object cardTitle="Playlists" idName="artist-playlists-card" cardTextFrom="title" items=artistPlaylists.data.data ) }}
+</div>
+
+<div id="related-artist-wrapper">
+    {{> card_slide (object cardTitle="Fans also like" idName="similiar-artists-card" cardTextFrom="name" items=similiarArtists.data.data ) }}
+</div>
+
+<script>
+$(function() {
+    initSplide('#artist-albums-card', {
+        perPage: 6,
+        permove: 4,
+        breakpoints: {
+            640: {
+                perPage: 3,
+            },
+            800: {
+                perPage: 3,
+            }
+        }
+    })
+    initSplide('#artist-playlists-card')
+    initSplide('#similiar-artists-card')
+});
+
+</script>

@@ -1,0 +1,8 @@
+# session secret sign
+SESSION_SECRET=blackcat
+# mongodb atlas user
+M_ATLAS_USER=username
+# mongodb atlas password user
+M_ATLAS_PASS=passw0rd
+# mongodb atlas connection url
+M_ATLAS_URL=dbname.something.mongodb.net?retryWrites=true&w=majority

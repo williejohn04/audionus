@@ -1,0 +1,29 @@
+<div class="row mt-5 ml-4 mr-4">
+    <div class="col s12 mb-3">
+        <h5>{{cardTitle}}</h5>
+    </div>
+    <div class="col s12">
+        <section id="{{idName}}" class="splide" aria-label="{{cardTitle}}">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    {{#each items}}
+                        <li class="splide__slide">
+                            <div class="splide__slide__container">
+                                <a href="/{{this.type}}/{{this.id}}">
+                                    <img data-splide-lazy="{{#if this.picture_medium }}{{this.picture_medium}} {{else}} {{this.cover_medium}} {{/if}}" alt="{{this.cardTitle}}">
+                                </a>
+                            </div>
+                            
+                            <a href="/{{this.type}}/{{this.id}}"><p class="grey-text grey-lighten-5 truncate">{{getCardText this ../cardTextFrom}}</p></a>
+                            {{#compareValues this.type 'album' 'equal' }}
+                                {{#if this.artist}}
+                                    <a href="/artist/{{this.artist.id}}"><small style="margin-top: -12px !important;" class="grey-text grey-lighten-5 truncate">{{this.artist.name}}</small></a>
+                                {{/if}}
+                            {{/compareValues}}
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </section>
+    </div>
+</div>
