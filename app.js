@@ -25,6 +25,7 @@ const User = require('./models/User');
 
 // routes
 const mainRouter = require('./routes/r_main');
+const albumRouter = require('./routes/r_album');
 const authRouter = require('./routes/r_auth');
 const artistRouter = require('./routes/r_artist');
 const apiRouter = require('./routes/r_api');
@@ -79,6 +80,7 @@ app.use('/', mainRouter);
 app.use('/auth', authRouter);
 app.use('/api', apiRouter);
 app.use('/artist', artistRouter);
+app.use('/album', albumRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

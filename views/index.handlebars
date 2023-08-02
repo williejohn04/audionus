@@ -6,8 +6,8 @@
 
 <div id="top-playlists-wrapper"></div>
 
-<script id="view-script">
-    $(function() {
+<script>
+    $(async function() {
         getRequest('https://api.deezer.com/radio/top?output=jsonp', 'jsonp', function (data) {
             appendCardsComponent("Playlist You'll Like", data.data, 'recommendation-playlists-cards','#recommendation-playlists-wrapper');
         })

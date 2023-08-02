@@ -75,7 +75,8 @@ const decodeEntities = (function() {
 
 
 function changePage(url, pushState = 1) {
-    if (url == 'javascript:void(0);' || url == '#' || url == '') return;
+    invalidUrl = ['javascript:void(0);', '#', '', window.location.pathname]
+    if (invalidUrl.includes(url) && pushState == 1) return;
     $('body').removeClass('loaded')
     $.ajax({
         url: (url.includes('?')) ? url+'&layout=false' : url+'?layout=false',
@@ -83,12 +84,17 @@ function changePage(url, pushState = 1) {
         success: function(response) {
             $('.changeable-content').html(response);
             if(pushState) history.pushState(null, null, url);
-            $('body').addClass('loaded');            
+            $('body').addClass('loaded');
+            M.AutoInit();
+            $('.track-dropdown-trigger').dropdown({
+                coverTrigger: false,
+                constrainWidth: false
+            });
             return document.body.scrollTop = document.documentElement.scrollTop = 0;
         }
     })
 }
 
-window.addEventListener('popstate', function(e){
+window.addEventListener('popstate', () => {
     return changePage(window.location.pathname, 0);
 });

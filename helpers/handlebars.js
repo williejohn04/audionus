@@ -40,18 +40,18 @@ const helpers = {
         date = date.split('-');
         return `${date[2]}/${date[1]}/${date[0]}`
     },
-    getContributors: function (rawData) {
+    getLinks: function (rawData, type) {
         let result = '';
-        rawData.forEach((contributor, index) => {
+        rawData.forEach((i, index) => {
 
             if (index !== rawData.length - 1) {
                 result += `
-          <a class="grey-text lighten-5 hide-on-med-and-down" href="/artist/${contributor.id}">${contributor.name}, </a>
+          <a class="grey-text lighten-5" href="/${type}/${i.id}">${i.name}, </a>
         `
             }
             else {
                 result += `
-          <a class="grey-text lighten-5 hide-on-med-and-down" href="/artist/${contributor.id}">${contributor.name}</a>
+          <a class="grey-text lighten-5" href="/${type}/${i.id}">${i.name}</a>
         `
             }
 

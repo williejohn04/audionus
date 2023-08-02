@@ -6,7 +6,7 @@ let axios = require('axios')
 router.get('/:id', ensureLoggedIn('/auth/login'), async (req, res, next) => {
     let data = {};
     data.artist = await axios.get('https://api.deezer.com/artist/'+req.params.id);
-    data.title = data.artist.name
+    data.title = data.artist.data.name
     data.topTracks = await axios.get('https://api.deezer.com/artist/'+req.params.id+'/top');
     data.artistAlbums = await axios.get('https://api.deezer.com/artist/'+req.params.id+'/top');
     data.similiarArtists = await axios.get('https://api.deezer.com/artist/'+req.params.id+'/related?limit=14');

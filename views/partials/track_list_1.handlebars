@@ -1,0 +1,49 @@
+<tr style="border-bottom:1px solid #212121;">
+    <td class="track-info-wrapper">
+        <div class="row" style="margin-bottom: -10px !important;">
+            
+            <div class="col s2 m2 xl2 l2 left-align">
+                <a href="/album/{{item.album.id}}"><img width="45px" height="45px" src="{{item.album.cover_small}}" class="responsive-img"> </a>
+            </div>
+
+            <div class="col s8 m8 {{#if item.contributors}} xl5 l5 {{else}}  xl8 l8 {{/if}} left-align">
+                <a href="javascript:void(0);" class="white-text track-title clamp-overflow"> {{item.title}} {{#if item.explicit_lyrics}}<i class="material-icons grey-text lighten-5 tiny prefix">explicit</i> {{/if}} </a>
+                {{#if item.contributors}}
+                    <span class="clamp-overflow" style="-webkit-line-clamp: 1 !important;">
+                        {{{getLinks item.contributors 'artist'}}}
+                    </span>
+                {{else}}
+                    <a class="grey-text lighten-5 clamp-overflow" style="-webkit-line-clamp: 1 !important;" href="/album/{{item.album.id}}">{{item.album.title}}</a>
+                {{/if}}
+            </div>
+
+            {{#if item.contributors}}
+                <div class="col xl3 l3 hide-on-med-and-down">
+                    <a class="grey-text lighten-5 clamp-overflow" style="-webkit-line-clamp: 2 !important;" href="/album/{{item.album.id}}">{{item.album.title}}</a>
+                    {{!-- <span class="clamp-overflow" style="-webkit-line-clamp: 2 !important;">
+                        {{{getLinks item.contributors 'artist'}}}
+                    </span> --}}
+                </div>
+            {{/if}}
+
+            <div class="col s1 m1 l1 xl1 right-align">
+                <a href="javascript:void(0);" class="grey-text">{{fixDuration item.duration}}</a>
+            </div>
+
+            <div class="col s1 m1 l1 xl1 right-align">
+                <a href="javascript:void(0);" class="dropdown-trigger track-dropdown-trigger grey-text" data-target="track-list-menu"><i class="material-icons">more_vert</i></a>
+                <ul id='track-list-menu' class="dropdown-content black" style="z-index: 10 !important;">
+                    <li><a href="javascript:void(0);" class="white-text"> <i class="material-icons">favorite_border</i> Add to favorite </a></li>
+                    <li><a href="javascript:void(0);" class="white-text"> <i class="material-icons">playlist_add</i> Add to Playlist </a></li>
+                    <li><a href="/artist/{{item.artist.id}}" class="white-text"> <i class="material-icons">person_add</i> View Artist </a></li>
+                    <li><a href="/album/{{item.album.id}}" class="white-text"> <i class="material-icons">album</i> View Album </a></li>
+                </ul>
+            </div>
+
+        </div>
+    </td>
+</tr>
+
+<script>
+    // $('.track-title').css('width', (document.getElementsByClassName('track-info-wrapper')[0].offsetWidth - 5))
+</script>
