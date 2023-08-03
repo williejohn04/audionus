@@ -5,15 +5,19 @@ let axios = require('axios')
 /* GET home page. */
 router.get('/:id', ensureLoggedIn('/auth/login'), async (req, res, next) => {
     let data = {};
-    data.artist = await axios.get('https://api.deezer.com/artist/'+req.params.id);
-    data.title = data.artist.data.name
-    data.topTracks = await axios.get('https://api.deezer.com/artist/'+req.params.id+'/top');
-    data.artistAlbums = await axios.get('https://api.deezer.com/artist/'+req.params.id+'/top');
-    data.similiarArtists = await axios.get('https://api.deezer.com/artist/'+req.params.id+'/related?limit=14');
-    data.artistAlbums = await axios.get('https://api.deezer.com/artist/'+req.params.id+'/albums/');
-    data.artistPlaylists = await axios.get('https://api.deezer.com/artist/'+req.params.id+'/playlists/?limit=14');
-    if (req.query.layout == 'false') data.layout = false;
-    res.render('v_artist/v_detail', data)
+    utils.hitDeezerAPI(['/artist/'+req.params.id, '/artist/'+req.params.id+'/top', '/artist/'+req.params.id+'/related?limit=14', '/artist/'+req.params.id+'/albums/','/artist/'+req.params.id+'/playlists/?limit=14'], results => {
+        if (results.errors) res.redirect('/');
+        data.artist = results[0];
+        data.topTracks = results[1];
+        data.similiarArtists = results[2];
+        data.artistAlbums = results[3];
+        data.artistPlaylists = results[4];
+        data.title = data.artist.name
+
+        if (req.query.layout == 'false') data.layout = false;
+        res.render('v_artist/v_detail', data)
+    })
+
 });
 
 module.exports = router;

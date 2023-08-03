@@ -1,13 +1,13 @@
 <div class="row mr-5 mt-5 ml-5 mb-5">
     <div class="col s12 m12 l6 xl6 center">
-        <img src="{{artist.data.picture_big}}" style="border: 1px solid #263238" class="z-depth-5circle circle responsive-img">
+        <img src="{{artist.picture_big}}" style="border: 1px solid #263238" class="z-depth-5circle circle responsive-img">
     </div>
     <div class="col s12 m12 l6 xl6 center">
-        <h4 style="font-weight: bold;">{{artist.data.name}}</h4>
+        <h4 style="font-weight: bold;">{{artist.name}}</h4>
         <table>
             <tbody>
-                {{#each topTracks.data.data}}
-                    {{> track_list_1 (object item=this) }}
+                {{#each topTracks.data}}
+                    {{> track_list_1 (object item=this index=@index) }}
                 {{/each}}
                 <tr>
                     <td class="right">
@@ -22,15 +22,15 @@
 </div>
 
 <div id="artist-albums-wrapper">
-    {{> card_slide (object cardTitle="Discography" idName="artist-albums-card" cardTextFrom="title" items=artistAlbums.data.data ) }}
+    {{> card_slide (object cardTitle="Discography" idName="artist-albums-card" cardTextFrom="title" items=artistAlbums.data ) }}
 </div>
 
 <div id="artist-playlists-wrapper">
-    {{> card_slide (object cardTitle="Playlists" idName="artist-playlists-card" cardTextFrom="title" items=artistPlaylists.data.data ) }}
+    {{> card_slide (object cardTitle="Playlists" idName="artist-playlists-card" cardTextFrom="title" items=artistPlaylists.data ) }}
 </div>
 
 <div id="related-artist-wrapper">
-    {{> card_slide (object cardTitle="Fans also like" idName="similiar-artists-card" cardTextFrom="name" items=similiarArtists.data.data ) }}
+    {{> card_slide (object cardTitle="Fans also like" idName="similiar-artists-card" cardTextFrom="name" items=similiarArtists.data ) }}
 </div>
 
 <script>

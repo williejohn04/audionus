@@ -15,8 +15,10 @@ const localStrategy = require('passport-local').Strategy
 const flash = require('connect-flash');
 
 hbsHelpers = require('./helpers/handlebars')
+utils = require('./helpers/utils')
 
 global.ensureLoggedIn = ensureLoggedIn;
+global.utils = utils;
 
 // model database
 const User = require('./models/User');
@@ -29,6 +31,7 @@ const albumRouter = require('./routes/r_album');
 const authRouter = require('./routes/r_auth');
 const artistRouter = require('./routes/r_artist');
 const apiRouter = require('./routes/r_api');
+const playlistRouter = require('./routes/r_playlist');
 
 const app = express();
 const mongoURL = `mongodb+srv://${process.env.M_ATLAS_USER}:${process.env.M_ATLAS_PASS}@${process.env.M_ATLAS_URL}`
@@ -81,6 +84,7 @@ app.use('/auth', authRouter);
 app.use('/api', apiRouter);
 app.use('/artist', artistRouter);
 app.use('/album', albumRouter);
+app.use('/playlist', playlistRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

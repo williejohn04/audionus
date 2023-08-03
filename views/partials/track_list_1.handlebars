@@ -2,29 +2,24 @@
     <td class="track-info-wrapper">
         <div class="row" style="margin-bottom: -10px !important;">
             
-            <div class="col s2 m2 xl2 l2 left-align">
-                <a href="/album/{{item.album.id}}"><img width="45px" height="45px" src="{{item.album.cover_small}}" class="responsive-img"> </a>
+            <div class="col s1 m1 xl1 l1 left-align">
+                <a href="javascript:void(0);"><img width="45px" height="45px" src="{{item.album.cover_small}}" class="responsive-img"> </a>
             </div>
 
-            <div class="col s8 m8 {{#if item.contributors}} xl5 l5 {{else}}  xl8 l8 {{/if}} left-align">
-                <a href="javascript:void(0);" class="white-text track-title clamp-overflow"> {{item.title}} {{#if item.explicit_lyrics}}<i class="material-icons grey-text lighten-5 tiny prefix">explicit</i> {{/if}} </a>
+            <div class="col s9 m9 xl5 l5 left-align">
+                <a href="javascript:void(0);" class="white-text track-title clamp-overflow"> {{increaseNumber index 1}}. {{item.title}} {{#if item.explicit_lyrics}}<i class="material-icons grey-text lighten-5 tiny prefix">explicit</i> {{/if}} </a>
                 {{#if item.contributors}}
                     <span class="clamp-overflow" style="-webkit-line-clamp: 1 !important;">
                         {{{getLinks item.contributors 'artist'}}}
                     </span>
                 {{else}}
-                    <a class="grey-text lighten-5 clamp-overflow" style="-webkit-line-clamp: 1 !important;" href="/album/{{item.album.id}}">{{item.album.title}}</a>
+                    <a class="grey-text lighten-5 clamp-overflow" style="-webkit-line-clamp: 1 !important;" href="javascript:void(0);">{{item.artist.name}}</a>
                 {{/if}}
             </div>
 
-            {{#if item.contributors}}
-                <div class="col xl3 l3 hide-on-med-and-down">
-                    <a class="grey-text lighten-5 clamp-overflow" style="-webkit-line-clamp: 2 !important;" href="/album/{{item.album.id}}">{{item.album.title}}</a>
-                    {{!-- <span class="clamp-overflow" style="-webkit-line-clamp: 2 !important;">
-                        {{{getLinks item.contributors 'artist'}}}
-                    </span> --}}
-                </div>
-            {{/if}}
+            <div class="col xl4 l4 hide-on-med-and-down">
+                <a class="grey-text lighten-5 clamp-overflow" style="-webkit-line-clamp: 2 !important;" href="javascript:void(0);">{{item.album.title}}</a>
+            </div>
 
             <div class="col s1 m1 l1 xl1 right-align">
                 <a href="javascript:void(0);" class="grey-text">{{fixDuration item.duration}}</a>
