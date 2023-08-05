@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-let axios = require('axios')
 
 /* GET home page. */
 router.get('/:id', ensureLoggedIn('/auth/login'), (req, res, next) => {

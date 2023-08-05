@@ -24,9 +24,9 @@ const helpers = {
         return number.toLocaleString()
     },
     fixDuration: function (time, type = 'track') {
-        let hours = ~~(time / 3600);
-        let minute = ~~((time % 3600) / 60);
-        let second = ~~time % 60;
+        const hours = ~~(time / 3600);
+        const minute = ~~((time % 3600) / 60);
+        const second = ~~time % 60;
 
         if (time >= 3600) {
             return `${hours} h ${minute} mins`

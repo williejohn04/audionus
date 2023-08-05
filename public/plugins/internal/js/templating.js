@@ -48,7 +48,7 @@ function appendCardsComponent(cardTitle, json, idName, appendTo, cardTextFrom = 
 
 $(document).on("click", "a", function(event){
     event.preventDefault();
-    let link = $(this).attr('href');
+    const link = $(this).attr('href');
     if (link != 'javascript:void(0);' || link != '#' || link != '') changePage(link);
     return;
 });

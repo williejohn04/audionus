@@ -1,5 +1,3 @@
-let axios = require('axios')
-
 module.exports = utils = {
     hitDeezerAPI: function(paths, cb) {
         if (!Array.isArray(paths)) paths = [paths]

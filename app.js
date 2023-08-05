@@ -14,6 +14,11 @@ const mongoStore = require('connect-mongo');
 const localStrategy = require('passport-local').Strategy
 const flash = require('connect-flash');
 
+const Axios = require('axios');
+const {setupCache} = require('axios-cache-interceptor')
+
+global.axios = setupCache(Axios); 
+
 hbsHelpers = require('./helpers/handlebars')
 utils = require('./helpers/utils')
 
