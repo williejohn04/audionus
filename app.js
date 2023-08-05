@@ -37,6 +37,7 @@ const authRouter = require('./routes/r_auth');
 const artistRouter = require('./routes/r_artist');
 const apiRouter = require('./routes/r_api');
 const playlistRouter = require('./routes/r_playlist');
+const browseRouter = require('./routes/r_browse');
 
 const app = express();
 const mongoURL = `mongodb+srv://${process.env.M_ATLAS_USER}:${process.env.M_ATLAS_PASS}@${process.env.M_ATLAS_URL}`
@@ -90,6 +91,7 @@ app.use('/api', apiRouter);
 app.use('/artist', artistRouter);
 app.use('/album', albumRouter);
 app.use('/playlist', playlistRouter);
+app.use('/browse', browseRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

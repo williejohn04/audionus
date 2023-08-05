@@ -1,0 +1,56 @@
+
+<div class="container">
+    <div class="row mt-5">
+        <a href="javascript:void(0);" data-filter="track" class="search-filter-badge waves-effect waves-light btn-small m-2 black-text" style="background-color: white; border: 1px solid #212121; border-radius: 20px 20px;">Tracks</a>
+        <a href="javascript:void(0);" data-filter="artist" class="search-filter-badge waves-effect waves-light btn-small m-2" style="background-color: #010101; border: 1px solid aliceblue; border-radius: 20px 20px;">Artists</a>
+        <a href="javascript:void(0);" data-filter="album" class="search-filter-badge waves-effect waves-light btn-small m-2" style="background-color: #010101; border: 1px solid aliceblue; border-radius: 20px 20px;">Albums</a>
+        <a href="javascript:void(0);" data-filter="radio" class="search-filter-badge waves-effect waves-light btn-small m-2" style="background-color: #010101; border: 1px solid aliceblue; border-radius: 20px 20px;">Radio</a>
+        <a href="javascript:void(0);" data-filter="playlist" class="search-filter-badge waves-effect waves-light btn-small m-2" style="background-color: #010101; border: 1px solid aliceblue; border-radius: 20px 20px;">Playlists</a>
+        <br>
+        <span class="hide-on-med-and-down ml-2"><small class="grey-text">Didn't find what you're looking for? please be more specific.</small></span>
+    </div>
+
+    <div class="row">
+        <div class="col s12 m12 xl12 l12 mb-5 mt-5 track-search-results search-results">
+            {{!-- <h4 style="font-weight: bold;">{{album.artist.name}}</h4> --}}
+            <table>
+                <tbody>
+                    {{#each searchedTracks.data}}
+                        {{> track_list_1 (object item=this index=@index) }}
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="col s12 m12 xl12 l12 artist-search-results search-results"></div>
+        <div class="col s12 m12 xl12 l12 album-search-results search-results"></div>
+        <div class="col s12 m12 xl12 l12 playlist-search-results search-results"></div>
+        <div class="col s12 m12 xl12 l12 radio-search-results search-results"></div>
+
+    </div>
+</div>
+
+
+<div id="search-query" data-q="{{searchQuery}}"></div>
+
+<script>
+    $(document).on('click', '.search-filter-badge', function() {
+        $(document).find('.search-filter-badge').css({'background-color': '#010101', 'border': '1px solid aliceblue'}).removeClass('black-text')
+        $(this).css({'background-color': 'white', 'border': '1px solid #212121'}).addClass('black-text')
+        const type = $(this).data('filter');
+
+        $('.search-results').addClass('hide');
+        $(`.${type}-search-results`).removeClass('hide');
+
+        if (type !== 'track') {
+            if ($(`.${type}-search-results`).html() == '') {
+                getRequest('/api/search/'+type+'?q='+$('#search-query').data('q'), 'json', function (results) {
+                    appendCardComponent('', results.data, '.'+type+'-search-results', type, ((type == 'artist') ? true : '' ))
+                })
+            }
+        }
+
+    })
+
+
+</script>

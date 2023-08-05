@@ -27,9 +27,9 @@ function initSplide(element, customConfigs = null) {
     new Splide(element).mount();
 }
 
-function appendCardsComponent(cardTitle, json, idName, appendTo, cardTextFrom = 'title') {
+function appendSplideComponent(cardTitle, json, idName, appendTo, cardTextFrom = 'title') {
     $.ajax({
-        url: '/api/get-cards-component', 
+        url: '/api/get-splide-component', 
         method: 'POST',
         data: {
             json: JSON.stringify(json),
@@ -44,6 +44,25 @@ function appendCardsComponent(cardTitle, json, idName, appendTo, cardTextFrom = 
         }
     })
 }
+
+function appendCardComponent(cardTitle, json, appendTo, type, circleImg = false) {
+    $.ajax({
+        url: '/api/get-cards-component', 
+        method: 'POST',
+        data: {
+            json: JSON.stringify(json),
+            title: cardTitle,
+            circleImg: circleImg,
+            type: type
+        },
+        dataType: 'html',
+        success: function (data) {
+            $(document).find(appendTo).html(data)
+        }
+    })
+}
+
+
 
 
 $(document).on("click", "a", function(event){
@@ -73,6 +92,12 @@ const decodeEntities = (function() {
     return decodeHTMLEntities;
 })();
 
+$(document).on('keyup', '.search-input', function(e){
+    if (e.keyCode === 13)
+    {
+        changePage(`/browse/search/${decodeURIComponent($(this).val())}`);
+    }
+});
 
 function changePage(url, pushState = 1) {
     invalidUrl = ['javascript:void(0);', '#', '', window.location.pathname]

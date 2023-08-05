@@ -62,6 +62,9 @@ const helpers = {
     },
     getInitialNames: function (name) {
         return name.match(/(\b\S)?/g).join("").match(/(^\S|\S$)?/g).join("").toUpperCase()
+    },
+    objectGetter: function (obj, index, subkey) {
+        return obj[index][subkey]
     }
 }
 

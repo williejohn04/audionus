@@ -1,13 +1,13 @@
 <tr style="border-bottom:1px solid #212121;">
-    <td class="track-info-wrapper">
+    <td class="track-info-wrapper justify-content-center">
         <div class="row" style="margin-bottom: -10px !important;">
             
-            <div class="col s1 m1 xl1 l1 left-align">
+            <div class="col s2 m2 xl2 l2 justify-content-center">
                 <a href="javascript:void(0);"><img width="45px" height="45px" src="{{item.album.cover_small}}" class="responsive-img"> </a>
             </div>
 
-            <div class="col s9 m9 xl5 l5 left-align">
-                <a href="javascript:void(0);" class="white-text track-title clamp-overflow"> {{increaseNumber index 1}}. {{item.title}} {{#if item.explicit_lyrics}}<i class="material-icons grey-text lighten-5 tiny prefix">explicit</i> {{/if}} </a>
+            <div class="col s8 m8 xl4 l4 justify-content-center">
+                <a href="javascript:void(0);" class="white-text track-title clamp-overflow">{{item.title}} {{#if item.explicit_lyrics}}<i class="material-icons grey-text lighten-5 tiny prefix">explicit</i> {{/if}} </a>
                 {{#if item.contributors}}
                     <span class="clamp-overflow" style="-webkit-line-clamp: 1 !important;">
                         {{{getLinks item.contributors 'artist'}}}
@@ -26,8 +26,8 @@
             </div>
 
             <div class="col s1 m1 l1 xl1 right-align">
-                <a href="javascript:void(0);" class="dropdown-trigger track-dropdown-trigger grey-text" data-target="track-list-menu"><i class="material-icons">more_vert</i></a>
-                <ul id='track-list-menu' class="dropdown-content black" style="z-index: 10 !important;">
+                <a href="javascript:void(0);" class="dropdown-trigger track-dropdown-trigger grey-text" data-target="track-list-menu-{{index}}"><i class="material-icons">more_vert</i></a>
+                <ul id='track-list-menu-{{index}}' class="dropdown-content black" style="z-index: 10 !important;">
                     <li><a href="javascript:void(0);" class="white-text"> <i class="material-icons">favorite_border</i> Add to favorite </a></li>
                     <li><a href="javascript:void(0);" class="white-text"> <i class="material-icons">playlist_add</i> Add to Playlist </a></li>
                     <li><a href="/artist/{{item.artist.id}}" class="white-text"> <i class="material-icons">person_add</i> View Artist </a></li>
@@ -38,7 +38,3 @@
         </div>
     </td>
 </tr>
-
-<script>
-    // $('.track-title').css('width', (document.getElementsByClassName('track-info-wrapper')[0].offsetWidth - 5))
-</script>

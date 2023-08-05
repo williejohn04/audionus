@@ -4,16 +4,16 @@ const viewSetup = {
         view: 'index',
         script: `$(window).on('load', function() {
             getRequest('https://api.deezer.com/radio/top?output=jsonp', 'jsonp', data => {
-                appendCardsComponent("Playlist You'll Like", data.data, 'recommendation-playlists-cards','#recommendation-playlists-wrapper')
+                appendSplideComponent("Playlist You'll Like", data.data, 'recommendation-playlists-cards','#recommendation-playlists-wrapper')
             })
         
             getRequest('https://api.deezer.com/editorial/0/charts?output=jsonp', 'jsonp', charts => {
-                appendCardsComponent("Top Playlists", charts.playlists.data, 'top-playlists-cards','#top-playlists-wrapper')
-                appendCardsComponent("Top Artists", charts.artists.data, 'top-artists-cards','#top-artists-wrapper', 'name')
+                appendSplideComponent("Top Playlists", charts.playlists.data, 'top-playlists-cards','#top-playlists-wrapper')
+                appendSplideComponent("Top Artists", charts.artists.data, 'top-artists-cards','#top-artists-wrapper', 'name')
             })
             
             getRequest('https://api.deezer.com/editorial/0/selection?output=jsonp', 'jsonp', albums => {
-                appendCardsComponent("Top Albums", albums.data, 'top-albums-cards','#top-albums-wrapper')
+                appendSplideComponent("Top Albums", albums.data, 'top-albums-cards','#top-albums-wrapper')
             })
         })`
     },

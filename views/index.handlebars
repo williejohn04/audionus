@@ -13,15 +13,15 @@
                 d.picture_medium = `https://textoverimage.moesif.com/image?image_url=${d.picture_medium}&x_align=center&y_align=middle&text_size=16&margin=2&text=${encodeURIComponent(d.title)}`
             });
 
-            appendCardsComponent("Radio MIX You'll Like", data.data, 'recommendation-playlists-cards','#recommendation-playlists-wrapper');
+            appendSplideComponent("Radio MIX You'll Like", data.data, 'recommendation-playlists-cards','#recommendation-playlists-wrapper');
         })
         getRequest('https://api.deezer.com/editorial/0/charts?output=jsonp', 'jsonp', function (charts) {
-            appendCardsComponent("Top Playlists", charts.playlists.data, 'top-playlists-cards','#top-playlists-wrapper');
-            appendCardsComponent("Top Artists", charts.artists.data, 'top-artists-cards','#top-artists-wrapper', 'name');
+            appendSplideComponent("Top Playlists", charts.playlists.data, 'top-playlists-cards','#top-playlists-wrapper');
+            appendSplideComponent("Top Artists", charts.artists.data, 'top-artists-cards','#top-artists-wrapper', 'name');
         })
         
         getRequest('https://api.deezer.com/editorial/0/selection?output=jsonp', 'jsonp', function (albums) {
-            appendCardsComponent("Top Albums", albums.data, 'top-albums-cards','#top-albums-wrapper');
+            appendSplideComponent("Top Albums", albums.data, 'top-albums-cards','#top-albums-wrapper');
         })
     });
 </script>

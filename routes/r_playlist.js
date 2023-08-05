@@ -5,7 +5,7 @@ const router = express.Router();
 router.get('/:id', ensureLoggedIn('/auth/login'), (req, res, next) => {
     // https://api.deezer.com/playlist/1479458365
     let data = {};
-    utils.hitDeezerAPI('/playlist/'+req.params.id, async (response) => {
+    utils.hitDeezerAPI('/playlist/'+req.params.id, true, async (response) => {
         if (response.errors) res.redirect('/');
         
         data.playlist = response[0]
