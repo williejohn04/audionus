@@ -1,27 +1,37 @@
-<div id="recommendation-playlists-wrapper"></div>
+<div class="container">
+    <div id="charts-playlists-wrapper">
+        {{> card_slide (object cardTitle="All around the world" idName="charts-playlists-card" cardTextFrom="title" items=chartsPlaylists ) }}
+    </div>
 
-<div id="top-artists-wrapper"></div>
+    <div id="new-releases-wrapper">
+        {{!-- {{> card_slide (object cardTitle="Weekly selection" idName="weekly-selection-card" cardTextFrom="title" items=selection ) }} --}}
+    </div>
+    
+    <div id="top-artists-wrapper"></div>
 
-<div id="top-albums-wrapper"></div>
 
-<div id="top-playlists-wrapper"></div>
+    <div id="radio-mix-wrapper"></div>
+
+    <div id="top-playlists-wrapper"></div>
+</div>
 
 <script>
     $(async function() {
-        getRequest('https://api.deezer.com/radio/top?output=jsonp', 'jsonp', function (data) {
-            data.data.forEach(d => {
-                d.picture_medium = `https://textoverimage.moesif.com/image?image_url=${d.picture_medium}&x_align=center&y_align=middle&text_size=16&margin=2&text=${encodeURIComponent(d.title)}`
-            });
+        initSplide('#charts-playlists-card')
+        // initSplide('#weekly-selection-card')
 
-            appendSplideComponent("Radio MIX You'll Like", data.data, 'recommendation-playlists-cards','#recommendation-playlists-wrapper');
+        getRequest('https://api.deezer.com/radio/top', 'jsonp', function (data) {
+            appendSplideComponent("Radios MIX You'll Like", data.data, 'radio-mix-cards','#radio-mix-wrapper');
         })
-        getRequest('https://api.deezer.com/editorial/0/charts?output=jsonp', 'jsonp', function (charts) {
+
+        getRequest('https://api.deezer.com/editorial/0/releases', 'jsonp', function (data) {
+            appendSplideComponent("New Releases", data.data, 'new-releases-cards','#new-releases-wrapper');
+        })
+        getRequest('https://api.deezer.com/editorial/0/charts', 'jsonp', function (charts) {
+            console.log(charts, typeof charts)
             appendSplideComponent("Top Playlists", charts.playlists.data, 'top-playlists-cards','#top-playlists-wrapper');
             appendSplideComponent("Top Artists", charts.artists.data, 'top-artists-cards','#top-artists-wrapper', 'name');
         })
-        
-        getRequest('https://api.deezer.com/editorial/0/selection?output=jsonp', 'jsonp', function (albums) {
-            appendSplideComponent("Top Albums", albums.data, 'top-albums-cards','#top-albums-wrapper');
-        })
+    
     });
 </script>

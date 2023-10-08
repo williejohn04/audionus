@@ -14,10 +14,10 @@
                                 </a>
                             </div>
                             
-                            <a href="/{{this.type}}/{{this.id}}"><p class="grey-text grey-lighten-5 truncate">{{getCardText this ../cardTextFrom}}</p></a>
+                            <a href="/{{this.type}}/{{this.id}}"><p class="grey-text truncate">{{getCardText this ../cardTextFrom}}</p></a>
                             {{#compareValues this.type 'album' 'equal' }}
                                 {{#if this.artist}}
-                                    <a href="/artist/{{this.artist.id}}"><small style="margin-top: -12px !important;" class="grey-text grey-lighten-5 truncate">{{this.artist.name}}</small></a>
+                                    <a href="/artist/{{this.artist.id}}"><small style="margin-top: -12px !important;" class="grey-text text-lighten-3 truncate">{{this.artist.name}}</small></a>
                                 {{/if}}
                             {{/compareValues}}
                         </li>

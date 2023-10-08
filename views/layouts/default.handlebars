@@ -32,8 +32,12 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <script>
         function getRequest(url, dataType, cb) {
+          if (dataType == 'jsonp') {
+            url = url + ( (url.includes('?') ? '&' : '?' ) ) + 'output=jsonp' 
+          }
+          
           $.ajax({
-            method: 'get',
+            method: 'get' ,
             url: url,
             dataType: dataType,
             crossDomain: true,

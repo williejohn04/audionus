@@ -4,7 +4,7 @@
         <a href="javascript:void(0);" data-filter="track" class="search-filter-badge waves-effect waves-light btn-small m-2 black-text" style="background-color: white; border: 1px solid #212121; border-radius: 20px 20px;">Tracks</a>
         <a href="javascript:void(0);" data-filter="artist" class="search-filter-badge waves-effect waves-light btn-small m-2" style="background-color: #010101; border: 1px solid aliceblue; border-radius: 20px 20px;">Artists</a>
         <a href="javascript:void(0);" data-filter="album" class="search-filter-badge waves-effect waves-light btn-small m-2" style="background-color: #010101; border: 1px solid aliceblue; border-radius: 20px 20px;">Albums</a>
-        <a href="javascript:void(0);" data-filter="radio" class="search-filter-badge waves-effect waves-light btn-small m-2" style="background-color: #010101; border: 1px solid aliceblue; border-radius: 20px 20px;">Radio</a>
+        <a href="javascript:void(0);" data-filter="radio" class="search-filter-badge waves-effect waves-light btn-small m-2" style="background-color: #010101; border: 1px solid aliceblue; border-radius: 20px 20px;">Radios</a>
         <a href="javascript:void(0);" data-filter="playlist" class="search-filter-badge waves-effect waves-light btn-small m-2" style="background-color: #010101; border: 1px solid aliceblue; border-radius: 20px 20px;">Playlists</a>
         <br>
         <span class="hide-on-med-and-down ml-2"><small class="grey-text">Didn't find what you're looking for? please be more specific.</small></span>
@@ -41,10 +41,11 @@
 
         $('.search-results').addClass('hide');
         $(`.${type}-search-results`).removeClass('hide');
-
         if (type !== 'track') {
             if ($(`.${type}-search-results`).html() == '') {
+        console.log(type)
                 getRequest('/api/search/'+type+'?q='+$('#search-query').data('q'), 'json', function (results) {
+                    console.log(results)
                     appendCardComponent('', results.data, '.'+type+'-search-results', type, ((type == 'artist') ? true : '' ))
                 })
             }
