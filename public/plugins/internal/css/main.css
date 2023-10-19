@@ -7,6 +7,14 @@
   z-index: 999;
 }
 
+.c-pointer {
+  cursor: pointer !important;
+}
+
+.c-auto {
+  cursor: auto !important;
+}
+
 .clamp-overflow {
   width: 100%;
   overflow: hidden;

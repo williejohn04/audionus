@@ -10,7 +10,7 @@ router.get('/:id', ensureLoggedIn('/auth/login'), (req, res, next) => {
         data.album = response[0];
         data.title = data.album.title
         data.othersAlbum = await axios.get('https://api.deezer.com/artist/'+data.album.artist.id+'/albums')
-        data.cardTitle = 'More by ' + data.album.title
+        data.cardTitle = 'More by ' + data.album.artist.name
         if (req.query.layout == 'false') data.layout = false;
         res.render('v_album/v_detail', data)
     })

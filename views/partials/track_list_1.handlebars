@@ -1,29 +1,49 @@
+{{#compareValues index 0 'equal'}}
+    <tr class="hide-on-med-and-down" style="border-bottom:1px solid #212121;">
+        <th class="track-info-wrapper justify-content-center">
+            <div class="row" style="margin-bottom: -10px !important;">
+                <div class="grey-text grey-lighten-1 col xl2 l2">
+                    #
+                </div>
+                <div class="grey-text grey-lighten-1 col xl4 l4 justify-content-center">
+                    Title
+                </div>
+                
+                <div class="grey-text grey-lighten-1 col xl4 l4">
+                    Album
+                </div>
+            </div>
+        </th>
+    </tr>
+{{/compareValues}}
+
 <tr style="border-bottom:1px solid #212121;">
     <td class="track-info-wrapper justify-content-center">
         <div class="row" style="margin-bottom: -10px !important;">
-            
-            <div class="col s2 m2 xl2 l2 justify-content-center">
-                <a href="javascript:void(0);"><img width="45px" height="45px" src="{{item.album.cover_small}}" class="responsive-img"> </a>
-            </div>
+            <span data-track-id="{{item.id}}" class="c-pointer track-field" data-track-number="{{index}}" data-track-title="{{item.title}}" data-track-cover="{{item.album.cover_small}}" data-album-id="{{item.album.id}}" data-artist-id="{{item.artist.id}}" data-artist="{{item.artist.name}}" id="{{item.id}}">
+                <div class="col s2 m2 xl2 l2 justify-content-center">
+                    <a href="javascript:void(0);"><img width="45px" height="45px" src="{{item.album.cover_small}}" class="responsive-img"> </a>
+                </div>
 
-            <div class="col s8 m8 xl4 l4 justify-content-center">
-                <a href="javascript:void(0);" class="white-text track-title clamp-overflow">{{item.title}} {{#if item.explicit_lyrics}}<i class="material-icons grey-text lighten-5 tiny prefix">explicit</i> {{/if}} </a>
-                {{#if item.contributors}}
-                    <span class="clamp-overflow" style="-webkit-line-clamp: 1 !important;">
-                        {{{getLinks item.contributors 'artist'}}}
-                    </span>
-                {{else}}
-                    <a class="grey-text lighten-5 clamp-overflow" style="-webkit-line-clamp: 1 !important;" href="javascript:void(0);">{{item.artist.name}}</a>
-                {{/if}}
-            </div>
+                <div class="col s8 m8 xl4 l4 justify-content-center">
+                    <a href="javascript:void(0);" class="white-text track-title clamp-overflow">{{item.title}} {{#if item.explicit_lyrics}}<i class="material-icons grey-text lighten-5 tiny prefix">explicit</i> {{/if}} </a>
+                    {{#if item.contributors}}
+                        <span class="clamp-overflow" style="-webkit-line-clamp: 1 !important;">
+                            {{{getLinks item.contributors 'artist'}}}
+                        </span>
+                    {{else}}
+                        <a class="grey-text lighten-5 clamp-overflow" style="-webkit-line-clamp: 1 !important;" href="javascript:void(0);">{{item.artist.name}}</a>
+                    {{/if}}
+                </div>
 
-            <div class="col xl4 l4 hide-on-med-and-down">
-                <a class="grey-text lighten-5 clamp-overflow" style="-webkit-line-clamp: 2 !important;" href="javascript:void(0);">{{item.album.title}}</a>
-            </div>
+                <div class="col xl4 l4 hide-on-med-and-down">
+                    <a class="grey-text lighten-5 clamp-overflow" style="-webkit-line-clamp: 2 !important;" href="javascript:void(0);">{{item.album.title}}</a>
+                </div>
 
-            <div class="col s1 m1 l1 xl1 right-align">
-                <a href="javascript:void(0);" class="grey-text">{{fixDuration item.duration}}</a>
-            </div>
+                <div class="col s1 m1 l1 xl1 right-align">
+                    <a href="javascript:void(0);" class="grey-text">{{fixDuration item.duration}}</a>
+                </div>
+            </span>
 
             <div class="col s1 m1 l1 xl1 right-align">
                 <a href="javascript:void(0);" class="dropdown-trigger track-dropdown-trigger grey-text" data-target="track-list-menu-{{index}}"><i class="material-icons">more_vert</i></a>

@@ -40,7 +40,7 @@ router.post('/register',
 (req, res) => {
     const errors = validationResult(req).array();
     if (errors.length > 0) {
-        return res.render('v_auth/v_register', {title: 'Register Failed.', formErrors: errors})
+        return res.render('v_auth/v_register', {title: 'Register Failed.', formErrors: errors, layout: 'auth'})
     } else {
         User.register(new User({
             username: req.body.username,
