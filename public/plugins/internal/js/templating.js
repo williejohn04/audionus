@@ -68,6 +68,7 @@ function appendCardComponent(cardTitle, json, appendTo, type, circleImg = false)
 $(document).on("click", "a", function(event){
     event.preventDefault();
     const link = $(this).attr('href');
+    if (link.includes('#')) return false;
     if (link != 'javascript:void(0);' || link != '#' || link != '') changePage(link);
     return;
 });

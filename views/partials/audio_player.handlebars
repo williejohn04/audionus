@@ -1,30 +1,34 @@
-
-<div id="playerFooter" class="grey darken-4">
+<div class="d-none hide" id="video-tag-wrapper">
+</div>
+<div id="playerFooter" class="grey hide darken-4">
   <div class="audio-progress-bar hide-on-large-only show-on-medium-and-down"
-    style="width: 40%;height: 3px;background-color: white;"></div>
+    style="width: 0%; height: 3px;background-color: white;"></div>
   <div class="row m-2 ">
     <div class="col s12 m12 l4 xl4 mt-2 center">
       <i class="material-icons" style="font-size: 2.5rem !important;">favorite_border</i>
-      <span> <a href="#"><img src="https://api.napster.com/imageserver/v2/albums/alb.200863246/images/40x47.jpg"
+      <span> <a href="#"><img id="audio-player-cover" width="40px" height="47px" src=""
             class="responsive-img"> </a> </span>
       <span class="left-align" style="display: inline-block;">
-        Blue flowers
+        <span id="audio-player-title"></span>
         <br>
-        <span class="grey-text ligthen-5"><a class="grey-text lighten-5" href="#"> Mazzy Star</a></span>
+        <span class="grey-text ligthen-5" id="audio-player-artist"><a class="grey-text lighten-5" href="#"> Mazzy Star</a></span>
       </span>
     </div>
 
     <div class="col s12 m12 l4 xl4 mb-2 mt-2 center offset-l2 offset-xl2">
       <span class="audio-control-btn center-align">
-        <i class="material-icons">shuffle</i>
-        <i class="material-icons ml-2">skip_previous</i>
-        <i class="material-icons ml-2">play_circle_outline</i>
-        <i class="material-icons ml-2">skip_next</i>
-        <i class="material-icons ml-2">repeat</i>
+        <i class="c-pointer material-icons">shuffle</i>
+        <i class="c-pointer material-icons ml-2">skip_previous</i>
+        <i class="c-pointer material-icons ml-2" id="audio-state-icon">pause_circle_outline</i>
+        <i class="c-pointer material-icons ml-2">skip_next</i>
+        <i class="c-pointer material-icons ml-2">repeat</i>
+        <i class="c-pointer material-icons ml-2 modal-trigger" data-target="modal3">playlist_play</i>
       </span>
       <div class="progress white hide-on-med-and-down show-on-large-only">
-        <div class="blue-grey darken-1 determinate" style="width: 70%"></div>
+        <div class="audio-progress-bar blue-grey darken-1 determinate" style="width: 0%"></div>
       </div>
+      <small style="margin-top: -5px;" class="hide-on-med-and-down show-on-large-only left audio-current-time"></small>
+      <small style="margin-top: -5px;" class="audio-duration hide-on-med-and-down show-on-large-only right"></small>
     </div>
 
   </div>
@@ -43,8 +47,8 @@
     <div class="row">
       <div class="col s12">
         <ul class="tabs grey darken-4">
-          <li class="tab col s6 darken-4"><a style="color:white !important;" class="text-white text-white active" href="#queue-list">Queue</a></li>
-          <li class="tab col s6 darken-4"><a style="color:white !important;" class="text-white text-white" href="#lyric">Lyric</a></li>
+          <li class="tab col s6 darken-4"><a style="color:white !important;" class="text-white text-white active" href="#queue-list" onclick="return false;">Queue</a></li>
+          <li class="tab col s6 darken-4"><a style="color:white !important;" class="text-white text-white" href="#lyric" onclick="return false;">Lyric</a></li>
         </ul>
     </div>
   </div>

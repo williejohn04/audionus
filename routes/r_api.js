@@ -49,4 +49,17 @@ router.get('/editorial/:type', ensureLoggedIn('/auth/login'), async (req, res, n
     res.end(JSON.stringify(editorial.data))
 })
 
+router.get('/playback/getVideoId', async (req, res, next) => {
+  const {Innertube, Utils, UniversalCache } = require('youtubei.js');
+  const youtube = await Innertube.create({location: 'ID'})
+  
+  const searched = await youtube.search(`${req.query.title} ${req.query.artist}`)
+
+  console.log(req.query.title, req.query.artist, searched.results[0].id)
+  const info = await youtube.getBasicInfo(searched.results[0].id);
+  const format = info.chooseFormat({ type: 'audio', quality: 'best' });
+  const url = format?.decipher(youtube.session.player);
+  res.json({url: url})
+})
+
 module.exports = router;

@@ -6,6 +6,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const {create} = require('express-handlebars');
+const cors = require('cors');
 
 const mongoose = require('mongoose');
 const passport = require('passport');
@@ -84,6 +85,10 @@ app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()))
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+app.use(cors({
+	origin: 'http://localhost:3000'
+}));
 
 app.use('/', mainRouter);
 app.use('/auth', authRouter);
