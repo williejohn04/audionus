@@ -12,14 +12,7 @@
 
     <div class="row">
         <div class="col s12 m12 xl12 l12 mb-5 mt-5 track-search-results search-results">
-            {{!-- <h4 style="font-weight: bold;">{{album.artist.name}}</h4> --}}
-            <table>
-                <tbody>
-                    {{#each searchedTracks.data}}
-                        {{> track_list_1 (object item=this index=@index) }}
-                    {{/each}}
-                </tbody>
-            </table>
+            {{> track_list_1 (object items=searchedTracks.data) }}
         </div>
         
         <div class="col s12 m12 xl12 l12 artist-search-results search-results"></div>

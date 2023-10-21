@@ -5,20 +5,7 @@
         </div>
         <div class="col s12 m12 l6 xl6 center">
             <h4 style="font-weight: bold;">{{artist.name}}</h4>
-            <table>
-                <tbody>
-                    {{#each topTracks.data}}
-                        {{> track_list_1 (object item=this index=@index) }}
-                    {{/each}}
-                    <tr>
-                        <td class="right">
-                            <span class="grey-text">view more &#62;&#62;</span>
-
-                        </td>
-                    </tr>
-
-                </tbody>
-            </table>
+            {{> track_list_1 (object items=topTracks.data) }} 
         </div>
     </div>
 

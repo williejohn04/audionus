@@ -126,8 +126,12 @@ function updateQueueTrack() {
 $(document).on('click tap', '.track-field', function() {
     playlistTrack = [];
     $('.track-field').css('pointer-events', 'none');
-    firstTrackNumber = $(this).data('track-number')
-    $(document).find('.track-field').each((index, element) => {
+    $(this).parent().css('background-color', '#212121');
+    setTimeout(() => {
+        $(this).parent().css('background-color', '');
+    }, 750);
+    firstTrackNumber = $(this).parent().data('track-number')
+    $(document).find('.track-field-wrapper').each((index, element) => {
         playlistTrack.push({
             id: $(element).data('track-id'),
             number: $(element).data('track-number'),
@@ -138,7 +142,7 @@ $(document).on('click tap', '.track-field', function() {
             albumId: $(element).data('album-id')
         }) 
     });
-    playedTrack = findByValue(playlistTrack, $(this).data('track-id'))
+    playedTrack = findByValue(playlistTrack, $(this).parent().data('track-id'))
     clearInterval(audioProgress)
     updatePlayedTrack();
     updateQueueTrack();

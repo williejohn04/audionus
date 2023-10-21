@@ -1,60 +1,55 @@
-{{#compareValues index 0 'equal'}}
-    <tr class="hide-on-med-and-down" style="border-bottom:1px solid #212121;">
-        <th class="track-info-wrapper justify-content-center">
-            <div class="row" style="margin-bottom: -10px !important;">
-                <div class="grey-text grey-lighten-1 col xl2 l2">
-                    #
-                </div>
-                <div class="grey-text grey-lighten-1 col xl4 l4 justify-content-center">
-                    Title
-                </div>
+<table>
+    <thead>
+        <tr class="hide-on-med-and-down" style="border-bottom:1px solid #212121;">
+            <th>#</th>
+            <th>Title</th>
+            <th colspan="3">Album</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each items}}
+            <tr style="border-bottom:1px solid #212121;" class="track-field-wrapper" data-track-id="{{this.id}}" class="" data-track-number="{{index}}" data-track-title="{{this.title}}" data-track-cover="{{this.album.cover_small}}" data-album-id="{{this.album.id}}" data-artist-id="{{this.artist.id}}" data-artist="{{this.artist.name}}" id="{{this.id}}">
                 
-                <div class="grey-text grey-lighten-1 col xl4 l4">
-                    Album
-                </div>
-            </div>
-        </th>
-    </tr>
-{{/compareValues}}
-
-<tr style="border-bottom:1px solid #212121;">
-    <td class="track-info-wrapper justify-content-center waves-effect waves-track-field c-pointer track-field" data-track-id="{{item.id}}" class="" data-track-number="{{index}}" data-track-title="{{item.title}}" data-track-cover="{{item.album.cover_small}}" data-album-id="{{item.album.id}}" data-artist-id="{{item.artist.id}}" data-artist="{{item.artist.name}}" id="{{item.id}}">
-        <div class="row" style="margin-bottom: -10px !important;">
-            <span>
-                <div class="col s2 m2 xl2 l2 left">
-                    <a href="javascript:void(0);"><img width="45px" height="45px" src="{{item.album.cover_small}}" class="responsive-img"> </a>
-                </div>
-
-                <div class="col s8 m8 xl4 l4 justify-content-center">
-                    <a href="javascript:void(0);" class="white-text track-title clamp-overflow">{{item.title}} {{#if item.explicit_lyrics}}<i class="material-icons grey-text lighten-5 tiny prefix">explicit</i> {{/if}} </a>
-                    {{#if item.contributors}}
+                <td class="c-pointer track-field">
+                    <a href="javascript:void(0);"><img width="45px" height="45px" src="{{this.album.cover_small}}" class="responsive-img"> </a>
+                </td>
+                <td class="c-pointer track-field">
+                    <a href="javascript:void(0);" class="white-text track-title clamp-overflow">{{this.title}} {{#if this.explicit_lyrics}}<i class="material-icons grey-text lighten-5 tiny prefix">explicit</i> {{/if}} </a>
+                    {{#if this.contributors}}
                         <span class="clamp-overflow" style="-webkit-line-clamp: 1 !important;">
-                            {{{getLinks item.contributors 'artist'}}}
+                            {{{getLinks this.contributors 'artist'}}}
                         </span>
                     {{else}}
-                        <a class="grey-text lighten-5 clamp-overflow" style="-webkit-line-clamp: 1 !important;" href="javascript:void(0);">{{item.artist.name}}</a>
+                        <a class="grey-text lighten-5 clamp-overflow" style="-webkit-line-clamp: 1 !important;" href="javascript:void(0);">{{this.artist.name}}</a>
                     {{/if}}
-                </div>
+                </td>
+                <td class="c-pointer track-field">
+                    <a class="grey-text lighten-5 clamp-overflow" style="-webkit-line-clamp: 2 !important;" href="javascript:void(0);">{{this.album.title}}</a>
+                </td>
+                <td class="c-pointer track-field">
+                    <a href="javascript:void(0);" class="grey-text">{{fixDuration this.duration}}</a>
+                </td>
 
-                <div class="col xl4 l4 hide-on-med-and-down">
-                    <a class="grey-text lighten-5 clamp-overflow" style="-webkit-line-clamp: 2 !important;" href="javascript:void(0);">{{item.album.title}}</a>
-                </div>
-
-                <div class="col s1 m1 l1 xl1 right-align">
-                    <a href="javascript:void(0);" class="grey-text">{{fixDuration item.duration}}</a>
-                </div>
-            </span>
-
-            <div class="col s1 m1 l1 xl1 right-align">
-                <a href="javascript:void(0);" class="dropdown-trigger track-dropdown-trigger grey-text" data-target="track-list-menu-{{index}}"><i class="material-icons">more_vert</i></a>
-                <ul id='track-list-menu-{{index}}' class="dropdown-content black" style="z-index: 10 !important;">
-                    <li><a href="javascript:void(0);" class="white-text"> <i class="material-icons">favorite_border</i> Add to favorite </a></li>
-                    <li><a href="javascript:void(0);" class="white-text"> <i class="material-icons">playlist_add</i> Add to Playlist </a></li>
-                    <li><a href="/artist/{{item.artist.id}}" class="white-text"> <i class="material-icons">person_add</i> View Artist </a></li>
-                    <li><a href="/album/{{item.album.id}}" class="white-text"> <i class="material-icons">album</i> View Album </a></li>
-                </ul>
-            </div>
-
-        </div>
-    </td>
-</tr>
+                <td>
+                    <a href="javascript:void(0);" class="dropdown-trigger track-dropdown-trigger grey-text" data-target="track-list-menu-{{index}}"><i class="material-icons">more_vert</i></a>
+                    <ul id='track-list-menu-{{index}}' class="dropdown-content black" style="z-index: 10 !important;">
+                        <li><a href="javascript:void(0);" class="white-text"> <i class="material-icons">favorite_border</i> Add to favorite </a></li>
+                        <li><a href="javascript:void(0);" class="white-text"> <i class="material-icons">playlist_add</i> Add to Playlist </a></li>
+                        <li><a href="/artist/{{this.artist.id}}" class="white-text"> <i class="material-icons">person_add</i> View Artist </a></li>
+                        <li><a href="/album/{{this.album.id}}" class="white-text"> <i class="material-icons">album</i> View Album </a></li>
+                    </ul>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td colspan="2">
+                <span class="grey-text">more &#62;&#62;</span>
+            </td>
+        </tr>
+    </tfoot>
+</table>

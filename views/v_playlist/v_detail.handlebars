@@ -16,14 +16,7 @@
 
         </div>
         <div class="col s12 m12 xl12 l12 mb-5 mt-5">
-            {{!-- <h4 style="font-weight: bold;">{{album.artist.name}}</h4> --}}
-            <table>
-                <tbody>
-                    {{#each playlist.tracks.data}}
-                        {{> track_list_1 (object item=this index=@index) }}
-                    {{/each}}
-                </tbody>
-            </table>
+            {{> track_list_1 (object items=playlist.tracks.data) }}
         </div>
     </div>
 </div>
