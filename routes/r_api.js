@@ -50,10 +50,9 @@ router.get('/editorial/:type', ensureLoggedIn('/auth/login'), async (req, res, n
 })
 
 router.get('/playback/getVideoId', async (req, res, next) => {
-  const {Innertube, Utils, UniversalCache } = require('youtubei.js');
+  const {Innertube } = require('youtubei.js');
   const youtube = await Innertube.create({location: 'ID'})
-  
-  const searched = await youtube.search(`${req.query.title} ${req.query.artist}`)
+  const searched = await youtube.music.search(`${req.query.title} ${req.query.artist} Official Music Video`, {type: 'song'})
 
   console.log(req.query.title, req.query.artist, searched.results[0].id)
   const info = await youtube.getBasicInfo(searched.results[0].id);

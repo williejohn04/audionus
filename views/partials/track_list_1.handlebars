@@ -18,10 +18,10 @@
 {{/compareValues}}
 
 <tr style="border-bottom:1px solid #212121;">
-    <td class="track-info-wrapper justify-content-center">
+    <td class="track-info-wrapper justify-content-center waves-effect waves-track-field c-pointer track-field" data-track-id="{{item.id}}" class="" data-track-number="{{index}}" data-track-title="{{item.title}}" data-track-cover="{{item.album.cover_small}}" data-album-id="{{item.album.id}}" data-artist-id="{{item.artist.id}}" data-artist="{{item.artist.name}}" id="{{item.id}}">
         <div class="row" style="margin-bottom: -10px !important;">
-            <span data-track-id="{{item.id}}" class="c-pointer track-field" data-track-number="{{index}}" data-track-title="{{item.title}}" data-track-cover="{{item.album.cover_small}}" data-album-id="{{item.album.id}}" data-artist-id="{{item.artist.id}}" data-artist="{{item.artist.name}}" id="{{item.id}}">
-                <div class="col s2 m2 xl2 l2 justify-content-center">
+            <span>
+                <div class="col s2 m2 xl2 l2 left">
                     <a href="javascript:void(0);"><img width="45px" height="45px" src="{{item.album.cover_small}}" class="responsive-img"> </a>
                 </div>
 

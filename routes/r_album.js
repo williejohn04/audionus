@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/:id', ensureLoggedIn('/auth/login'), (req, res, next) => {
     let data = {};
     utils.hitDeezerAPI('/album/'+req.params.id, true, async (response) => {
-        if (response.errors) res.redirect('/');
+        if (response.error) return res.redirect('/' + ((req.query.layout == 'false') ? '?layout=false' : '' ) );
         
         data.album = response[0];
         data.title = data.album.title

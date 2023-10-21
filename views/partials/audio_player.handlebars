@@ -1,4 +1,5 @@
 <div class="d-none hide" id="video-tag-wrapper">
+  <video src="" id="audioTag"></video>
 </div>
 <div id="playerFooter" class="grey hide darken-4">
   <div class="audio-progress-bar hide-on-large-only show-on-medium-and-down"
@@ -17,15 +18,15 @@
 
     <div class="col s12 m12 l4 xl4 mb-2 mt-2 center offset-l2 offset-xl2">
       <span class="audio-control-btn center-align">
-        <i class="c-pointer material-icons">shuffle</i>
-        <i class="c-pointer material-icons ml-2">skip_previous</i>
+        <i class="c-pointer material-icons shuffle-state-icon" data-type="shuffle">shuffle</i>
+        <i class="c-pointer material-icons ml-2" onclick="changeTrack(0, 1);">skip_previous</i>
         <i class="c-pointer material-icons ml-2" id="audio-state-icon">pause_circle_outline</i>
-        <i class="c-pointer material-icons ml-2">skip_next</i>
-        <i class="c-pointer material-icons ml-2">repeat</i>
+        <i class="c-pointer material-icons ml-2" onclick="changeTrack(1, 1);">skip_next</i>
+        <i class="c-pointer material-icons ml-2 repeat-state-icon" data-type="repeat">repeat</i>
         <i class="c-pointer material-icons ml-2 modal-trigger" data-target="modal3">playlist_play</i>
       </span>
-      <div class="progress white hide-on-med-and-down show-on-large-only">
-        <div class="audio-progress-bar blue-grey darken-1 determinate" style="width: 0%"></div>
+      <div class="progress c-pointer white hide-on-med-and-down show-on-large-only">
+        <div class="audio-progress-bar blue-grey darken-1 determinate" style="width: 0%;"></div>
       </div>
       <small style="margin-top: -5px;" class="hide-on-med-and-down show-on-large-only left audio-current-time"></small>
       <small style="margin-top: -5px;" class="audio-duration hide-on-med-and-down show-on-large-only right"></small>
@@ -60,7 +61,7 @@
     <h3 class="header">Queue</h3>
     <table>
       <tbody>
-          <tr style="border-bottom:1px solid #212121;" class="track-field track0" data-tracknumber="0" data-name="She Belongs to Me (Take 1, Solo Acoustic)" data-artist="Bob Dylan">
+          <tr style="border-bottom:1px solid #212121;" class="" data-tracknumber="0" data-name="She Belongs to Me (Take 1, Solo Acoustic)" data-artist="Bob Dylan">
             <td>
               <span> <a href="/album/alb.200863246"><img src="https://api.napster.com/imageserver/v2/albums/alb.200863246/images/70x47.jpg" class="responsive-img"> </a> </span>
               <span style="display: inline-block;">

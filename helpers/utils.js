@@ -5,11 +5,7 @@ module.exports = utils = {
             let cleanData = [];
             await results.forEach(result => {
                 if (result.data.error) {
-                    cleanData.push({
-                        error: true,
-                        message: result.data.error.message
-                    })
-                    cleanData.errors = true
+                    cleanData.push({})
                 } else {
                     cleanData.push(result.data)
                 }
