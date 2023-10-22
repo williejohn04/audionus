@@ -103,16 +103,15 @@ $(document).on('keyup', '.search-input', function(e){
 function changePage(url, pushState = 1) {
     invalidUrl = ['javascript:void(0);', '#', '', window.location.pathname]
     if (invalidUrl.includes(url) && pushState == 1) return;
-    $('body').removeClass('loaded')
+    $(document).find('body').removeClass('loaded')
     $.ajax({
         url: (url.includes('?')) ? url+'&layout=false' : url+'?layout=false',
         dataType: 'html',
         success: function(response) {
-            $('.changeable-content').html(response);
+            $(document).find('.changeable-content').html(response);
             if(pushState) history.pushState(null, null, url);
-            $('body').addClass('loaded');
-            M.AutoInit();
-            $('.track-dropdown-trigger').dropdown({
+            $(document).find('body').addClass('loaded');
+            $(document).find('.track-dropdown-trigger').dropdown({
                 coverTrigger: false,
                 constrainWidth: false
             });

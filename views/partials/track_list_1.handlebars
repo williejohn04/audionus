@@ -8,7 +8,7 @@
     </thead>
     <tbody>
         {{#each items}}
-            <tr style="border-bottom:1px solid #212121;" class="track-field-wrapper" data-track-id="{{this.id}}" class="" data-track-number="{{index}}" data-track-title="{{this.title}}" data-track-cover="{{this.album.cover_small}}" data-album-id="{{this.album.id}}" data-artist-id="{{this.artist.id}}" data-artist="{{this.artist.name}}" id="{{this.id}}">
+            <tr style="border-bottom:1px solid #212121;" class="track-field-wrapper" data-track-id="{{this.id}}" data-track-number="{{@index}}" data-track-title="{{this.title}}" data-track-cover="{{this.album.cover_small}}" data-album-id="{{this.album.id}}" data-artist-id="{{this.artist.id}}" data-artist="{{this.artist.name}}" id="{{this.id}}">
                 
                 <td class="c-pointer track-field">
                     <a href="javascript:void(0);"><img width="45px" height="45px" src="{{this.album.cover_small}}" class="responsive-img"> </a>
@@ -31,8 +31,8 @@
                 </td>
 
                 <td>
-                    <a href="javascript:void(0);" class="dropdown-trigger track-dropdown-trigger grey-text" data-target="track-list-menu-{{index}}"><i class="material-icons">more_vert</i></a>
-                    <ul id='track-list-menu-{{index}}' class="dropdown-content black" style="z-index: 10 !important;">
+                    <a href="javascript:void(0);" class="dropdown-trigger track-dropdown-trigger grey-text" data-target="track-list-menu-{{this.id}}"><i class="material-icons">more_vert</i></a>
+                    <ul id='track-list-menu-{{this.id}}' class="dropdown-content black" style="z-index: 10 !important;">
                         <li><a href="javascript:void(0);" class="white-text"> <i class="material-icons">favorite_border</i> Add to favorite </a></li>
                         <li><a href="javascript:void(0);" class="white-text"> <i class="material-icons">playlist_add</i> Add to Playlist </a></li>
                         <li><a href="/artist/{{this.artist.id}}" class="white-text"> <i class="material-icons">person_add</i> View Artist </a></li>

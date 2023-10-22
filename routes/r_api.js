@@ -61,4 +61,8 @@ router.get('/playback/getVideoId', async (req, res, next) => {
   res.json({url: url})
 })
 
+router.get('/queue/modalHtml', async (req, res, next) => {
+  res.render('partials/track_list_1', {items: JSON.parse(req.body.json)})
+})
+
 module.exports = router;

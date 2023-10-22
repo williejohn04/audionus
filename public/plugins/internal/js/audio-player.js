@@ -52,6 +52,29 @@ function playAudio() {
     $('#playerFooter').removeClass('hide');
 }
 
+function appendQueueList() {
+    let html = '';
+    for (let index = 0; index < queueTrack.length; index++) {
+        html += `
+            <tr style="border-bottom:1px solid #424242;">
+                <td>
+                    <span> <a href="/album/alb.200863246">
+                        <img src="${queueTrack[index].cover}" class="responsive-img"> </a> 
+                    </span>
+                    <span style="display: inline-block;">
+                            ${queueTrack[index].title} 
+                        <br>
+                        <span class="grey-text ligthen-5 "><a class="grey-text lighten-5" href="javascript:void();"> ${queueTrack[0].artist}</a> • <a  class="grey-text lighten-5" href="javascript:void();">${queueTrack[index].title}</a>   
+                        </span>
+                    </span>
+                </td>
+            </tr>
+        `
+
+        if (index == queueTrack.length - 1) $(document).find('#queue-list-table').html(html)
+    }
+}
+
 function changeTrack(state, ignoreRepeat = 0) {
     let currentIndex = ((playedTrack) ? queueTrack.findIndex(x => x.id == playedTrack.id ) : -1 ) 
     if (state == 1 && ignoreRepeat == 1) { 
@@ -87,7 +110,7 @@ function runAudioProgressBar() {
             $('.audio-progress-bar').css('width', (document.getElementById('audioTag').currentTime / audio.duration) * 100 +'%');
         } else {
             clearInterval(audioProgress)
-            changeTrack(1);
+            changeTrack(1, 1);
         }
 
     }, 1000);
@@ -123,6 +146,7 @@ function updateQueueTrack() {
     }
 }
 
+let test;
 $(document).on('click tap', '.track-field', function() {
     playlistTrack = [];
     $('.track-field').css('pointer-events', 'none');
@@ -131,6 +155,7 @@ $(document).on('click tap', '.track-field', function() {
         $(this).parent().css('background-color', '');
     }, 750);
     firstTrackNumber = $(this).parent().data('track-number')
+    test = $(this)
     $(document).find('.track-field-wrapper').each((index, element) => {
         playlistTrack.push({
             id: $(element).data('track-id'),
@@ -146,6 +171,7 @@ $(document).on('click tap', '.track-field', function() {
     clearInterval(audioProgress)
     updatePlayedTrack();
     updateQueueTrack();
+    appendQueueList();
     playAudio();
 })
 
@@ -176,4 +202,8 @@ $(document).on('click tap', '.shuffle-state-icon, .repeat-state-icon', function(
     if ($(this).data('type') == 'repeat') cond = repeatState = !repeatState;
     if (cond) $(this).addClass('blue-grey-text text-darken-2')
     else $(this).removeClass('blue-grey-text text-darken-2')
+})
+
+$(document).on('click', '.queue-modal-trigger', function() {
+    $(document).find('.modal').modal('open');
 })
