@@ -8,7 +8,7 @@
     </thead>
     <tbody>
         {{#each items}}
-            <tr style="border-bottom:1px solid #212121;" class="track-field-wrapper" data-track-id="{{this.id}}" data-track-number="{{@index}}" data-track-title="{{this.title}}" data-track-cover="{{this.album.cover_small}}" data-album-id="{{this.album.id}}" data-artist-id="{{this.artist.id}}" data-artist="{{this.artist.name}}" id="{{this.id}}">
+            <tr style="border-bottom:1px solid #212121;" class="track-field-wrapper" data-track-id="{{this.id}}" data-track-number="{{@index}}" data-track-title="{{this.title}}" data-track-cover="{{this.album.cover_small}}" data-album-id="{{this.album.id}}" data-artist-id="{{this.artist.id}}" data-artist="{{this.artist.name}}" id="{{this.id}}" data-album="{{this.album.title}}" data-duration="{{this.duration}}">
                 
                 <td class="c-pointer track-field">
                     <a href="javascript:void(0);"><img width="45px" height="45px" src="{{this.album.cover_small}}" class="responsive-img"> </a>
@@ -23,7 +23,7 @@
                         <a class="grey-text lighten-5 clamp-overflow" style="-webkit-line-clamp: 1 !important;" href="javascript:void(0);">{{this.artist.name}}</a>
                     {{/if}}
                 </td>
-                <td class="c-pointer track-field">
+                <td class="c-pointer track-field hide-on-med-and-down">
                     <a class="grey-text lighten-5 clamp-overflow" style="-webkit-line-clamp: 2 !important;" href="javascript:void(0);">{{this.album.title}}</a>
                 </td>
                 <td class="c-pointer track-field">
@@ -42,7 +42,7 @@
             </tr>
         {{/each}}
     </tbody>
-    <tfoot>
+    {{!-- <tfoot>
         <tr>
             <td></td>
             <td></td>
@@ -51,5 +51,5 @@
                 <span class="grey-text">more &#62;&#62;</span>
             </td>
         </tr>
-    </tfoot>
+    </tfoot> --}}
 </table>

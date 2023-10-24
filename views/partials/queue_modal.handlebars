@@ -1,23 +1,29 @@
-<div id="queue-modal" class="modal bottom-sheet z-depth-5" style="border: 2px solid #263238; background-color: #212121;color: white;" tabindex="0">
-    <div class="modal-content">
-      <div class="row">
-        <div class="col s12">
-          <ul class="tabs grey darken-4">
-            <li class="tab col s6 darken-4"><a style="color:white !important;" class="text-white text-white active" href="#queue-list" onclick="return false;">Queue</a></li>
-            <li class="tab col s6 darken-4"><a style="color:white !important;" class="text-white text-white" href="#lyric" onclick="return false;">Lyric</a></li>
-          </ul>
-      </div>
-    </div>
-    <div id="lyric" class="col s12">
-      <small class="header">This lyric aren't time-synced (yet).</small>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi fugit rerum quia est aliquid architecto distinctio soluta nihil corporis eaque. Accusamus alias, distinctio minima accusantium dolor neque ducimus ut quidem.</p>
-    </div>
-      <div id="queue-list" class="col s12">
-      <h3 class="header">Queue</h3>
-      <table>
-        <tbody id="queue-list-table">
-        </tbody>
-      </table>
-      </div>
-    </div>
+
+<div id="queueModal">
+  <!--THIS IS IMPORTANT! to close the modal, the class name has to match the name given on the ID  class="close-queue-modal" -->
+  <div id="btn-close-modal" class="close-queueModal"> 
+    {{!-- <i class="large material-icons mt-5">close</i> --}}
   </div>
+            
+  <div>
+      <ul class="tabs grey row darken-4">
+        <li class="tab col s6 darken-4"><a style="color:white !important;" class="text-white text-white active" href="#queue-list" onclick="return false;">Queue</a></li>
+        <li class="tab col s6 darken-4"><a style="color:white !important;" class="text-white text-white" href="#lyric" onclick="return false;">Lyric</a></li>
+      </ul>
+
+      <div id="queue-list">
+        <div class="container">
+          <table>
+            <tbody id="queue-list-table">
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div id="lyric" class="col s12">
+        <small class="header">This lyric aren't time-synced (yet).</small>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi fugit rerum quia est aliquid architecto distinctio soluta nihil corporis eaque. Accusamus alias, distinctio minima accusantium dolor neque ducimus ut quidem.</p>
+      </div>
+  </div>
+</div>

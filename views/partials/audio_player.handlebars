@@ -1,7 +1,7 @@
 <div class="d-none hide" id="video-tag-wrapper">
   <video src="" id="audioTag"></video>
 </div>
-<div id="playerFooter" class="grey hide darken-4">
+<div id="playerFooter" class="grey darken-4">
   <div class="audio-progress-bar hide-on-large-only show-on-medium-and-down"
     style="width: 0%; height: 3px;background-color: white;"></div>
   <div class="row m-2 ">
@@ -23,7 +23,7 @@
         <i class="c-pointer material-icons ml-2" id="audio-state-icon">pause_circle_outline</i>
         <i class="c-pointer material-icons ml-2" onclick="changeTrack(1, 1);">skip_next</i>
         <i class="c-pointer material-icons ml-2 repeat-state-icon" data-type="repeat">repeat</i>
-        <i class="c-pointer material-icons ml-2 queue-modal-trigger">playlist_play</i>
+        <a href="#queueModal" id="queue-modal-trigger" data-opened="0"><i class="white-text c-pointer material-icons ml-2">playlist_play</i></a>
       </span>
       <div class="progress c-pointer white hide-on-med-and-down show-on-large-only">
         <div class="audio-progress-bar blue-grey darken-1 determinate" style="width: 0%;"></div>

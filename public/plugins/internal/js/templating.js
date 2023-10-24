@@ -100,6 +100,20 @@ $(document).on('keyup', '.search-input', function(e){
     }
 });
 
+function fixDuration (time, type = 'track') {
+    const hours = ~~(time / 3600);
+    const minute = ~~((time % 3600) / 60);
+    const second = ~~time % 60;
+
+    if (time >= 3600) {
+        return `${hours} h ${minute} mins`
+    } else {
+        if (type == 'album') return `${minute} mins`
+        else return `${minute}:${second}`
+    }
+
+}
+
 function changePage(url, pushState = 1) {
     invalidUrl = ['javascript:void(0);', '#', '', window.location.pathname]
     if (invalidUrl.includes(url) && pushState == 1) return;

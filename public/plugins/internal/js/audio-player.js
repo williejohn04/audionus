@@ -56,19 +56,21 @@ function appendQueueList() {
     let html = '';
     for (let index = 0; index < queueTrack.length; index++) {
         html += `
-            <tr style="border-bottom:1px solid #424242;">
-                <td>
-                    <span> <a href="/album/alb.200863246">
-                        <img src="${queueTrack[index].cover}" class="responsive-img"> </a> 
-                    </span>
-                    <span style="display: inline-block;">
-                            ${queueTrack[index].title} 
-                        <br>
-                        <span class="grey-text ligthen-5 "><a class="grey-text lighten-5" href="javascript:void();"> ${queueTrack[0].artist}</a> • <a  class="grey-text lighten-5" href="javascript:void();">${queueTrack[index].title}</a>   
-                        </span>
-                    </span>
-                </td>
-            </tr>
+        <tr style="border-bottom:1px solid #212121;" class="track-field-wrapper" data-track-id="${queueTrack[index].id}" data-track-number="${index}" data-track-title="${queueTrack[index].title}" data-track-cover="${queueTrack[index].cover}" data-album-id="${queueTrack[index].albumId}" data-artist-id="${queueTrack[index].artistId}" data-artist="${queueTrack[index].artist}" id="${queueTrack[index].id}" data-album="${queueTrack[index].album}>
+            <td class="c-pointer">
+                <a href="javascript:void(0);"><img width="45px" height="45px" src="{{this.album.cover_small}}" class="responsive-img"> </a>
+            </td>
+            <td class="c-pointer">
+                <a href="javascript:void(0);" class="white-text clamp-overflow">${queueTrack[index].title}</a>
+                <a class="grey-text lighten-5 clamp-overflow" style="-webkit-line-clamp: 1 !important;" href="javascript:void(0);">${queueTrack[index].artist}</a>
+            </td>
+            <td class="c-pointer">
+                <a class="grey-text lighten-5 clamp-overflow" style="-webkit-line-clamp: 2 !important;" href="javascript:void(0);">${queueTrack[index].album}</a>
+            </td>
+            <td class="c-pointer">
+                <a href="javascript:void(0);" class="grey-text">${fixDuration(queueTrack[index].duration)}</a>
+            </td>
+        </tr>
         `
 
         if (index == queueTrack.length - 1) $(document).find('#queue-list-table').html(html)
@@ -164,7 +166,9 @@ $(document).on('click tap', '.track-field', function() {
             artist: $(element).data('artist'),
             artistId: $(element).data('artist-id'),
             cover: $(element).data('track-cover'),
-            albumId: $(element).data('album-id')
+            albumId: $(element).data('album-id'),
+            album: $(element).data('album'),
+            duration: $(element).data('duration')
         }) 
     });
     playedTrack = findByValue(playlistTrack, $(this).parent().data('track-id'))
@@ -200,10 +204,34 @@ $(document).on('click tap', '.shuffle-state-icon, .repeat-state-icon', function(
     let cond;
     if ($(this).data('type') == 'shuffle') cond = shuffleState = !shuffleState;updateQueueTrack();
     if ($(this).data('type') == 'repeat') cond = repeatState = !repeatState;
-    if (cond) $(this).addClass('blue-grey-text text-darken-2')
-    else $(this).removeClass('blue-grey-text text-darken-2')
+    if (cond) $(this).addClass('blue-text text-darken-2')
+    else $(this).removeClass('blue-text text-darken-2')
 })
 
-$(document).on('click', '.queue-modal-trigger', function() {
-    $(document).find('.modal').modal('open');
+
+$(document).find("#queue-modal-trigger").animatedModal({
+    animatedIn: 'bounceInUp',
+    animatedOut: 'bounceOutDown',
+    animationDuration: '.3s',
+    color: '#010101',
+    beforeOpen: function() {
+        $(document).find('#queue-modal-trigger i').addClass('blue-text text-darken-2').removeClass('white-text');
+    },
+    afterClose: function() {
+        $(document).find('#queue-modal-trigger i').removeClass('blue-text text-darken-2').addClass('white-text');
+    }
+});
+
+$(document).on('click', '#queue-modal-trigger', function() {
+    if ($(this).data('opened')) {
+        $(document).find('#btn-close-modal').trigger('click')
+    }
+    $(this).data('opened', !$(this).data('opened'))
 })
+
+
+
+
+// $(document).on('click', '.queue-modal-trigger', function() {
+//     $(document).find('.modal').modal('open');
+// })
