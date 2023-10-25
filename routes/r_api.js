@@ -65,4 +65,11 @@ router.get('/queue/modalHtml', async (req, res, next) => {
   res.render('partials/track_list_1', {items: JSON.parse(req.body.json)})
 })
 
+router.get('/track/detail/:id', async (req, res, next) => {
+  utils.hitDeezerAPI('/track/'+req.params.id, true, async (results) => {
+    res.statusCode = 200;
+    res.end(JSON.stringify(results[0]));
+  })
+})
+
 module.exports = router;

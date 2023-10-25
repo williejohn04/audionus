@@ -1,10 +1,25 @@
-let playlistTrack = [], playedTrack, firstTrackNumber, audioProgress, shuffleState = 0, repeatState = 0, queueTrack = [], checkInterval;
+let playlistTrack = [], playedTrack, firstTrackNumber, audioProgress, shuffleState = 0, repeatState = 0, queueTrack = [], checkInterval, playlistFrom;
 
 function updatePlayedTrack() {
     $(document).find('#audio-state-icon').text(`pause_circle_outline`);
     $(document).find('#audio-player-cover').attr('src', playedTrack.cover);
     $(document).find('#audio-player-title').text(playedTrack.title);
     $(document).find('#audio-player-artist').text(playedTrack.artist);
+    document.title = `${playedTrack.title} - ${playedTrack.artist}`;
+    
+    $(document).find('.next-queue-border').remove();
+    if (playlistFrom.url) {
+        $(document).find('#queue-'+playedTrack.id).after(`
+            <tr class="next-queue-border" style="border-bottom: 1px solid grey;">
+                <td><p>Next From: <a href="/${(playlistFrom.type)}/${playlistFrom.url}">${playlistFrom.title}</a></p></td>
+                <td></td>
+                <td></td>
+            </tr>
+        `)
+    }
+
+    $(document).find('.queue-list-wrapper').removeClass('grey darken-4');
+    $(document).find('#queue-'+playedTrack.id).addClass('grey darken-4');
 }
 
 function initAudioPlayer(url) {
@@ -33,6 +48,26 @@ function initAudioPlayer(url) {
     }, 500);
 }
 
+function addToQueue(idTrack) {
+    getRequest('/api/track/detail/'+idTrack, 'json', async function(data) {
+        console.log(data)
+        await queueTrack.splice(1, 0, {
+            id: data.id,
+            number: playedTrack.number+1,
+            title: data.title,
+            artist: data.artist.name,
+            artistId: data.artist.id,
+            cover: data.album.cover_small,
+            albumId: data.album.id,
+            album: data.album.title,
+            duration: data.duration
+        });
+
+        appendQueueList();
+    })
+
+}
+
 function playAudio() {
     if (playedTrack.audioUrl) {
         initAudioPlayer(playedTrack.audioUrl) 
@@ -56,9 +91,9 @@ function appendQueueList() {
     let html = '';
     for (let index = 0; index < queueTrack.length; index++) {
         html += `
-        <tr style="border-bottom:1px solid #212121;" class="track-field-wrapper" data-track-id="${queueTrack[index].id}" data-track-number="${index}" data-track-title="${queueTrack[index].title}" data-track-cover="${queueTrack[index].cover}" data-album-id="${queueTrack[index].albumId}" data-artist-id="${queueTrack[index].artistId}" data-artist="${queueTrack[index].artist}" id="${queueTrack[index].id}" data-album="${queueTrack[index].album}>
-            <td class="c-pointer">
-                <a href="javascript:void(0);"><img width="45px" height="45px" src="{{this.album.cover_small}}" class="responsive-img"> </a>
+        <tr style="border-bottom:1px solid #212121;" class="queue-list-wrapper track-field-wrapper" data-track-id="${queueTrack[index].id}" data-track-number="${index}" data-track-title="${queueTrack[index].title}" data-track-cover="${queueTrack[index].cover}" data-album-id="${queueTrack[index].albumId}" data-artist-id="${queueTrack[index].artistId}" data-artist="${queueTrack[index].artist}" id="queue-${queueTrack[index].id}" data-album="${queueTrack[index].album}>
+        <td class="c-pointer track-field">
+                <a href="javascript:void(0);"><img width="45px" height="45px" src="${queueTrack[index].cover}" class="responsive-img"> </a>
             </td>
             <td class="c-pointer">
                 <a href="javascript:void(0);" class="white-text clamp-overflow">${queueTrack[index].title}</a>
@@ -146,9 +181,9 @@ function updateQueueTrack() {
         queueTrack = queueTrack.sort(function(a, b) { return a.number - b.number });
         queueTrack.unshift(playedTrack);
     }
+    appendQueueList();
 }
 
-let test;
 $(document).on('click tap', '.track-field', function() {
     playlistTrack = [];
     $('.track-field').css('pointer-events', 'none');
@@ -156,8 +191,14 @@ $(document).on('click tap', '.track-field', function() {
     setTimeout(() => {
         $(this).parent().css('background-color', '');
     }, 750);
+    let text = $(document).find('#playlist-detail').data('url');
+    playlistFrom = {
+        type: ( ( text && text.includes('album') ) ? 'album' : 'playlist' ),
+        url: $(document).find('#playlist-detail').data('url'),
+        title: $(document).find('#playlist-detail').data('title')
+    }
+
     firstTrackNumber = $(this).parent().data('track-number')
-    test = $(this)
     $(document).find('.track-field-wrapper').each((index, element) => {
         playlistTrack.push({
             id: $(element).data('track-id'),
@@ -173,9 +214,8 @@ $(document).on('click tap', '.track-field', function() {
     });
     playedTrack = findByValue(playlistTrack, $(this).parent().data('track-id'))
     clearInterval(audioProgress)
-    updatePlayedTrack();
     updateQueueTrack();
-    appendQueueList();
+    updatePlayedTrack();
     playAudio();
 })
 
@@ -206,6 +246,7 @@ $(document).on('click tap', '.shuffle-state-icon, .repeat-state-icon', function(
     if ($(this).data('type') == 'repeat') cond = repeatState = !repeatState;
     if (cond) $(this).addClass('blue-text text-darken-2')
     else $(this).removeClass('blue-text text-darken-2')
+    updateQueueTrack();
 })
 
 
@@ -228,10 +269,3 @@ $(document).on('click', '#queue-modal-trigger', function() {
     }
     $(this).data('opened', !$(this).data('opened'))
 })
-
-
-
-
-// $(document).on('click', '.queue-modal-trigger', function() {
-//     $(document).find('.modal').modal('open');
-// })

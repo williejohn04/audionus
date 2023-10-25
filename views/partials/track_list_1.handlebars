@@ -33,7 +33,8 @@
                 <td>
                     <a href="javascript:void(0);" class="dropdown-trigger track-dropdown-trigger grey-text" data-target="track-list-menu-{{this.id}}"><i class="material-icons">more_vert</i></a>
                     <ul id='track-list-menu-{{this.id}}' class="dropdown-content black" style="z-index: 10 !important;">
-                        <li><a href="javascript:void(0);" class="white-text"> <i class="material-icons">favorite_border</i> Add to favorite </a></li>
+                        <li><a href="javascript:void(0);" class="white-text"> <i class="material-icons">favorite_border</i> Add to Favorite </a></li>
+                        <li><a href="javascript:void(0);" class="white-text" id="add-to-queue" onclick="return addToQueue('{{this.id}}');" > <i class="material-icons">queue</i> Add to Queue </a></li>
                         <li><a href="javascript:void(0);" class="white-text"> <i class="material-icons">playlist_add</i> Add to Playlist </a></li>
                         <li><a href="/artist/{{this.artist.id}}" class="white-text"> <i class="material-icons">person_add</i> View Artist </a></li>
                         <li><a href="/album/{{this.album.id}}" class="white-text"> <i class="material-icons">album</i> View Album </a></li>
